@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+This project will evaluate your ability to create a web application with React (using create-react-app).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Using Create-React-App and a server that we have provided to you with fake email data, please implement the following functionality to mock the "GMail" service.
 
-## Available Scripts
+Mandatory Content
 
-In the project directory, you can run:
+[] View all of my email messages (subject line + sender)
+[] View one of my email messages with all of its details
+[] Send an email
+[] Search for a specific email by subject
 
-### `npm start`
+[] Frame out App.js React Class component with major areas
+  [] SearchEmails React Class Component
+  [] ListEmails React Class Component
+  [] ReadEmail React Class Component
+  [] SendEmail React Class Component
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[] App.js
+  [] Add State for emailList
+  [] Add State for emailId (email currently being read)
+  [] Add state for searchquery term
+  [] On component did mount fetch list of emails and assign to state
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[] ListEmail.js Component (proptype: emailList - the list of emails to display)
+  [] Displays a list fo ListEmailItems
+  [] ListEmailItem Functional Component (display subject line + sender)
+    [] Event listener on email subject line
+    [] Creates call back chain if an email subject line is clicked on to app state
 
-### `npm test`
+[] ReadEmail.js Component (proptypes: emails, emailId, selected?)
+  [] Display email data from props
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[] SendEmail.js Component
+  [] Build form to accept input
+  [] Event handler to send button with post action to server
+  [] Display Results
 
-### `npm run build`
+[] SearchEmails.js Component
+  [] Build input text area
+  [] Use event handler to search and update app state
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# USAF-sdi-react-checkpoint
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# API Routes
+http://localhost:3001/emails
+GET `/emails`:
+```
+    {
+      "sender": "katie@galvanize.com",
+      "recipient": "jane@galvanize.com" ,
+      "subject": "Standup meeting",
+      "message": "Mr. and Mrs. Dursley, of number four, Privet Drive, were
+        proud to say that they were perfectly normal, thank you very much.",
+      "date": "2020-08-23T18:25:43.511Z",
+      "id": 1
+    }
+```
+http://localhost:3001/emails/1
+GET `/emails/:id`:
 
-### `npm run eject`
+e.g. `/emails/1`:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+    {
+      "sender": "katie@galvanize.com",
+      "recipient": "jane@galvanize.com" ,
+      "subject": "Standup meeting",
+      "message": "Mr. and Mrs. Dursley, of number four, Privet Drive, were
+        proud to say that they were perfectly normal, thank you very much.",
+      "date": "2020-08-23T18:25:43.511Z",
+      "id": 1
+    }
+```
+http://localhost:3001/search?query=meeting
+GET `/search` with URI query:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+e.g. `/search?query=meeting`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+    {
+      "sender": "jean-marc@galvanize.com", "recipient": "jane@galvanize.com" ,
+      "subject": "Retro meeting",
+      "message": "They were the last people you’d expect to be involved
+        in anything strange or mysterious, because they just didn’t hold with such nonsense.",
+      "date": "2020-04-23T18:25:43.511Z",
+      "id": 2},
+```
+http://localhost:3001/send
+POST `/send`:
+{"sender": "string","recipient": "string","subject":"string","message": "string","date": "04/11/1982","id": 4001}
