@@ -48,7 +48,7 @@ class App extends React.Component {
             <ReadEmail emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected}/>
           </div>
           <div className="col-4 border">
-            <SendEmail />
+            <SendEmail  />
           </div>
         </div>
       </div>
