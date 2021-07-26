@@ -12,12 +12,21 @@ class App extends React.Component {
     this.state = {
       emailList: [],
       emailId: 0,
-      emailSelected: false
+      emailSelected: false,
+      searchQuery: undefined
     }
   }
 
   //function to set email displayed to selected email
-
+  componentDidMount() {
+    //fetch emailList from http://localhost:3001/emails
+    //update state with emailList
+    if (this.state.searchQuery === undefined) {
+      fetch('http://localhost:3001/emails')
+        .then(response => response.json())
+        .then(data => this.setState({emailList: data, emailSelected: false}));
+      }
+  }
 
   render(){
     return (
@@ -29,10 +38,10 @@ class App extends React.Component {
         </div>
         <div className="row">
           <div className="col-4 border">
-            <ListEmails />
+            <ListEmails emailList={this.state.emailList} callback={(info) => (this.setState({emailId: info, emailSelected: true}))}/>
           </div>
           <div className="col-4 border">
-            <ReadEmail />
+            <ReadEmail emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected}/>
           </div>
           <div className="col-4 border">
             <SendEmail />
