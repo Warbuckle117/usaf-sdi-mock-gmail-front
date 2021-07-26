@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ListEmailItem = (props) => {
 
   function onSubjectClick() {
-    props.callback(props.email.id);
+    props.callback(props.id);
   }
 
   if (props.email) {

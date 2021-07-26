@@ -35,7 +35,7 @@ class ListEmails extends React.Component {
             </div>
           {
           this.props.emailList.map((email, each) => {
-            return <ListEmailItem key={each} email={email} callback={this.props.callback}/>
+            return <ListEmailItem key={each} id={each} email={email} callback={this.props.callback}/>
             })
           }
           </div>

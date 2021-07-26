@@ -15,6 +15,7 @@ class App extends React.Component {
       emailSelected: false,
       searchQuery: undefined
     }
+
   }
 
   //function to set email displayed to selected email
@@ -28,12 +29,15 @@ class App extends React.Component {
       }
   }
 
+  //http://localhost:3001/search?query=meeting
+
+
   render(){
     return (
       <div className="container">
         <div className="row">
           <div className="col text-center border">
-            <SearchEmails />
+            <SearchEmails callback={(info) => (this.setState({emailList: info}))}/>
           </div>
         </div>
         <div className="row">
@@ -51,5 +55,7 @@ class App extends React.Component {
     );
   }
 }
+
+//callback={(queryParam) => (this.searchFunc(queryParam))}
 
 export default App;
