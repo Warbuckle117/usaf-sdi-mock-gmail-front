@@ -27,7 +27,7 @@ class ListEmails extends React.Component {
           <div className="col">
             <div className="row">
               <div className="col">
-                From
+                From:
               </div>
               <div className="col">
                 Subject:
@@ -35,7 +35,7 @@ class ListEmails extends React.Component {
             </div>
           {
           this.props.emailList.map((email, each) => {
-            return <ListEmailItem key={each} id={each} email={email} callback={this.props.callback}/>
+            return <ListEmailItem key={each} id={each} email={email} emailId={this.props.emailId} emailSelected={this.props.emailSelected} callback={this.props.callback}/>
             })
           }
           </div>

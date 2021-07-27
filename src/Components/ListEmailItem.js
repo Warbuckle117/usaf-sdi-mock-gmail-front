@@ -1,33 +1,59 @@
 import PropTypes from "prop-types";
+import React from "react";
 
 //(display subject line + sender)
-const ListEmailItem = (props) => {
+class ListEmailItem extends React.Component {
 
-  function onSubjectClick() {
-    props.callback(props.id);
+  constructor(){
+    super();
+    this.state = {
+      selected: false,
+      hover: false
+    }
   }
 
-  if (props.email) {
-    return (
+  onSubjectClick = () => {
+    this.props.callback(this.props.id);
+  }
+
+  onMouseOver() {
+    this.setState({
+      hover: !this.state.hover
+    });
+  }
+
+  render() {
+    let style = {};
+    if (this.props.emailSelected === true && this.props.id === this.props.emailId) {
+      style['fontWeight'] = 'bold';
+    };
+    if (this.state.hover) {
+      style['fontStyle'] = 'italic';
+      style['textDecoration'] = 'underline';
+    }
+
+    if (this.props.email) {
+      return (
+        <div className="row" onMouseEnter={this.onMouseOver.bind(this)} onMouseLeave={this.onMouseOver.bind(this)}>
+          <div className="col" style={style}>
+            {this.props.email.sender}
+          </div>
+          <div className="col" style={style} onClick={this.onSubjectClick}>
+            {this.props.email.subject}
+          </div>
+        </div>
+      );
+    } else {
+      return (
       <div className="row">
         <div className="col">
-          {props.email.sender}
-        </div>
-        <div className="col" onClick={onSubjectClick}>
-          {props.email.subject}
+          Invalid Email Data
         </div>
       </div>
-    );
-  } else {
-    return (
-    <div className="row">
-      <div className="col">
-        Invalid Email Data
-      </div>
-    </div>
-    );
+      );
+    }
   }
-};
+}
 
 ListEmailItem.propTypes = {
   email: PropTypes.object.isRequired,

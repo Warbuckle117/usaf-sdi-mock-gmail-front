@@ -24,14 +24,14 @@ class SearchEmails extends React.Component {
 
   render () {
     return (
-      <div className="row">
-        <div className="col-8">
+      <div className="row justify-content-center align-items-center text-center py-1 my-1">
+        <div className="col-3">
           <div className="search-bar form-inline">
             <input className="form-control" type="text" value={this.state.queryParam} onChange={(event) => this.updateQuery(event)}/>
           </div>
         </div>
         <div className="col-2">
-            <button className="" onClick={this.handleClick}>Search</button>
+            <button className="" onClick={this.handleClick}>Search Emails</button>
         </div>
       </div>
     )

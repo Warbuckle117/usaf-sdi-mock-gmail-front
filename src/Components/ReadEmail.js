@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
+import ReadEmailItem from "./ReadEmailItem";
+import ReadEmailMessage from "./ReadEmailMessage";
 
 class ReadEmail extends React.Component {
 
@@ -11,7 +13,7 @@ class ReadEmail extends React.Component {
   }
 
   render () {
-    if (!this.props.emailSelected) {
+    if (!this.props.emailSelected || this.props.emailList.length === 0 || !this.props.emailId) {
      return ( <div className="row">
       <div className="col">
         No Email Selected
@@ -22,11 +24,12 @@ class ReadEmail extends React.Component {
       return (
         <div className="row">
           <div className="col">
-          From: {this.props.emailList[this.props.emailId].sender}<br />
-          To: {this.props.emailList[this.props.emailId].recipient}<br />
-          Subject : {this.props.emailList[this.props.emailId].subject}<br />
-          Date: {this.props.emailList[this.props.emailId].date}<br />
-          Message: {this.props.emailList[this.props.emailId].message}<br />
+          <ReadEmailItem title='From: ' data={this.props.emailList[this.props.emailId].sender} />
+          <ReadEmailItem title='To: ' data={this.props.emailList[this.props.emailId].recipient} />
+          <ReadEmailItem title='Subject: ' data={this.props.emailList[this.props.emailId].subject} />
+          <ReadEmailItem title='Date: ' data={this.props.emailList[this.props.emailId].date} />
+          <ReadEmailItem title='Message: ' data=' ' />
+          <ReadEmailMessage data={this.props.emailList[this.props.emailId].message} />
           </div>
         </div>
       )

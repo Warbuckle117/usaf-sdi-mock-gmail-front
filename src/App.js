@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React from 'react'
 import SearchEmails from "./Components/SearchEmails";
 import ListEmails from "./Components/ListEmails";
@@ -34,15 +34,20 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="container">
+      <div className="container bg-light">
         <div className="row">
-          <div className="col text-center border">
+          <div className="col text-center align-items-center">
+            <h1>SDI Email Client</h1>
+          </div>
+        </div>
+        <div className="row py-1 my-1">
+          <div className="col text-center align-items-center">
             <SearchEmails callback={(info) => (this.setState({emailList: info}))}/>
           </div>
         </div>
         <div className="row">
           <div className="col-4 border">
-            <ListEmails emailList={this.state.emailList} callback={(info) => (this.setState({emailId: info, emailSelected: true}))}/>
+            <ListEmails emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected} callback={(info) => (this.setState({emailId: info, emailSelected: true}))}/>
           </div>
           <div className="col-4 border">
             <ReadEmail emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected}/>
