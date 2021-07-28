@@ -34,11 +34,11 @@ class ListEmailItem extends React.Component {
 
     if (this.props.email) {
       return (
-        <div className="row" onMouseEnter={this.onMouseOver.bind(this)} onMouseLeave={this.onMouseOver.bind(this)}>
+        <div className="row" onMouseEnter={this.onMouseOver.bind(this)} onMouseLeave={this.onMouseOver.bind(this)} onClick={this.onSubjectClick}>
           <div className="col" style={style}>
             {this.props.email.sender}
           </div>
-          <div className="col" style={style} onClick={this.onSubjectClick}>
+          <div className="col" style={style} >
             {this.props.email.subject}
           </div>
         </div>

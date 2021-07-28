@@ -10,29 +10,67 @@ class SendEmail extends React.Component {
     }
   }
 
-  clickHandler = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
+    console.log(event.target.from.value)
+    console.log(event.target.to.value)
+    console.log(event.target.subject.value)
+    console.log(event.target.message.value)
+
+    // http://localhost:3001/send
+    // POST `/send`:
+    let data = {"sender": event.target.from.value,
+              "recipient": event.target.to.value,
+              "subject": event.target.subject.value,
+              "message": event.target.message.value}
+
+    fetch('http://localhost:3001/send', {
+      method: 'post',
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(function (data) {
+      console.log('Request succeeded with JSON response', data);
+    })
+    .catch(function (error) {
+      console.log('Request failed', error);
+    });
   }
 
   render () {
     return (
-      <div className="row">
+      <form className="row" noValidate="noValidate" onSubmit={this.handleSubmit}>
         <div className="col">
-          Send Email Component Rendering
-          <form>
-              <input id="Sender" placeholder="insert Sender Email Here" />
-              <br/>
-              <input id="Reciepient" placeholder="insert Reciepient Email here"/>
-              <br/>
-              <input id="Subject" placeholder="insert Subject Here" />
-              <br/>
-              <input id="Body" placeholder="insert body here"/>
-              <br/>
-              <button onClick={this.clickHandler}>Submit</button>
-          </form>
+          <div className="row">
+            <div className="col">
+            <label className="form-label">From</label>
+              <input type="email" className="form-control" id="from" placeholder="name@example.com" aria-label="From"/>
+            </div>
+            <div className="col">
+            <label className="form-label">To</label>
+              <input type="email" className="form-control" id="to" placeholder="name@example.com" aria-label="To"/>
+          </div>
+        </div>
+        <div className="row">
+            <div className="col">
+              <div className="mb-3">
+                <label className="form-label">Subject</label>
+                <input type="text" className="form-control" id="subject" placeholder="Subject"/>
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Message</label>
+                <textarea className="form-control" id="message" rows="5"></textarea>
+              </div>
+              <div className="mb-3">
+                <button type="submit" >Send Email</button>
+              </div>
+          </div>
         </div>
       </div>
+    </form>
     )
   }
 }
