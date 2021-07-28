@@ -4,41 +4,40 @@ Using Create-React-App and a server that we have provided to you with fake email
 
 Mandatory Content
 
-[] View all of my email messages (subject line + sender)
-[] View one of my email messages with all of its details
-[] Send an email
-[] Search for a specific email by subject
+[X] View all of my email messages (subject line + sender)
+[X] View one of my email messages with all of its details
+[X] Send an email
+[X] Search for a specific email by subject
 
-[] Frame out App.js React Class component with major areas
-  [] SearchEmails React Class Component
-  [] ListEmails React Class Component
-  [] ReadEmail React Class Component
-  [] SendEmail React Class Component
+[X] Frame out App.js React Class component with major areas
+  [X] SearchEmails React Class Component
+  [X] ListEmails React Class Component
+  [X] ReadEmail React Class Component
+  [X] SendEmail React Class Component
 
-[] App.js
-  [] Add State for emailList
-  [] Add State for emailId (email currently being read)
-  [] Add state for searchquery term
-  [] On component did mount fetch list of emails and assign to state
+[X] App.js
+  [X] Add State for emailList
+  [X] Add State for emailId (email currently being read)
+  [X] Add state for searchquery term
+  [X] On component did mount fetch list of emails and assign to state
 
-[] ListEmail.js Component (proptype: emailList - the list of emails to display)
-  [] Displays a list fo ListEmailItems
-  [] ListEmailItem Functional Component (display subject line + sender)
-    [] Event listener on email subject line
-    [] Creates call back chain if an email subject line is clicked on to app state
+[X] ListEmail.js Component (proptype: emailList - the list of emails to display)
+  [X] Displays a list fo ListEmailItems
+  [X] ListEmailItem Functional Component (display subject line + sender)
+    [X] Event listener on email subject line
+    [X] Creates call back chain if an email subject line is clicked on to app state
 
-[] ReadEmail.js Component (proptypes: emails, emailId, selected?)
-  [] Display email data from props
+[X] ReadEmail.js Component (proptypes: emails, emailId, selected?)
+  [X] Display email data from props
 
-[] SendEmail.js Component
-  [] Build form to accept input
-  [] Event handler to send button with post action to server
-  [] Display Results
+[X] SendEmail.js Component
+  [X] Build form to accept input
+  [X] Event handler to send button with post action to server
+  [X] Display Results
 
-[] SearchEmails.js Component
-  [] Build input text area
-  [] Use event handler to search and update app state
-
+[X] SearchEmails.js Component
+  [X] Build input text area
+  [X] Use event handler to search and update app state
 
 # USAF-sdi-react-checkpoint
 
