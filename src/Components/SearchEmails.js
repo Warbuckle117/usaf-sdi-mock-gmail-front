@@ -12,14 +12,14 @@ class SearchEmails extends React.Component {
 
   updateQuery(event) {
     this.setState({queryParam: event.target.value});
+    if (event.target.value === '') {
+      this.handleClick();
+    }
   }
 
   handleClick = () => {
-    if(this.state.queryParam){
-      fetch(`http://localhost:3001/search?query=${this.state.queryParam}`)
-        .then(response => response.json())
-        .then(data => this.props.callback(data));
-    }
+    //send the search param "back" to app
+    this.props.callback(this.state.queryParam);
   }
 
   render () {
@@ -31,7 +31,7 @@ class SearchEmails extends React.Component {
           </div>
         </div>
         <div className="col-md-2 col-xs-4">
-            <button className="" onClick={this.handleClick}>Search Emails</button>
+            <button className="btn btn-primary" onClick={this.handleClick}>Search Emails</button>
         </div>
       </div>
     )

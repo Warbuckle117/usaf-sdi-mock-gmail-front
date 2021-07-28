@@ -12,13 +12,7 @@ class SendEmail extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.from.value)
-    console.log(event.target.to.value)
-    console.log(event.target.subject.value)
-    console.log(event.target.message.value)
 
-    // http://localhost:3001/send
-    // POST `/send`:
     let data = {"sender": event.target.from.value,
               "recipient": event.target.to.value,
               "subject": event.target.subject.value,
@@ -65,7 +59,7 @@ class SendEmail extends React.Component {
                 <textarea className="form-control" id="message" rows="5"></textarea>
               </div>
               <div className="mb-3">
-                <button type="submit" >Send Email</button>
+                <button className="btn btn-primary" type="submit" >Send Email</button>
               </div>
           </div>
         </div>

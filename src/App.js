@@ -13,24 +13,37 @@ class App extends React.Component {
       emailList: [],
       emailId: 0,
       emailSelected: false,
-      searchQuery: undefined
+      searchQuery: ''
     }
-
   }
 
-  //function to set email displayed to selected email
+  //this will run the first time the component mounts
   async componentDidMount() {
-    //fetch emailList from http://localhost:3001/emails
-    //update state with emailList
-    if (this.state.searchQuery === undefined) {
+    if (this.state.searchQuery === '') {
       await fetch('http://localhost:3001/emails')
         .then(response => response.json())
         .then(data => this.setState({emailList: data, emailSelected: false}));
+      } else {
+        await fetch(`http://localhost:3001/search?query=${this.state.searchQuery}`)
+          .then(response => response.json())
+          .then(data => this.setState({emailList: data, emailSelected: false}));
       }
   }
 
-  //http://localhost:3001/search?query=meeting
-
+  //this will run if the props or state changes, we will use this is the query param is updated
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.state.searchQuery !== prevState.searchQuery) {
+      if (this.state.searchQuery === '') {
+        await fetch('http://localhost:3001/emails')
+          .then(response => response.json())
+          .then(data => this.setState({emailList: data, emailSelected: false}));
+        } else {
+          await fetch(`http://localhost:3001/search?query=${this.state.searchQuery}`)
+            .then(response => response.json())
+            .then(data => this.setState({emailList: data, emailSelected: false}));
+        }
+    }
+  }
 
   render(){
     return (
@@ -42,17 +55,20 @@ class App extends React.Component {
         </div>
         <div className="row py-1 my-1">
           <div className="col text-center align-items-center">
-            <SearchEmails callback={(info) => (this.setState({emailList: info}))}/>
+            <SearchEmails callback={(info) => (this.setState({searchQuery: info}))}/>
           </div>
         </div>
         <div className="row">
-          <div className="col col-xs-12 border">
+          <div className="col-md-4 col-xs-12 border">
+            <h2>Inbox</h2>
             <ListEmails emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected} callback={(info) => (this.setState({emailId: info, emailSelected: true}))}/>
           </div>
-          <div className="col col-xs-12 border">
+          <div className="col-md-4 col-xs-12 border">
+            <h2>Preview Pane</h2>
             <ReadEmail emailList={this.state.emailList} emailId={this.state.emailId} emailSelected={this.state.emailSelected}/>
           </div>
-          <div className="col col-xs-12 border">
+          <div className="col-md-4 col-xs-12 border">
+            <h2>Send Email</h2>
             <SendEmail  />
           </div>
         </div>
